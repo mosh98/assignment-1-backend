@@ -1,36 +1,40 @@
 package hero;
 
 import HeroAttributes.HeroAttributes;
+import Items.Slot;
+import Items.WeaponType;
+
+import java.util.HashMap;
 
 abstract class Hero {
-//fields GENREAL:
+
+    //fields GENREAL:
     //Name
-    String name;
+    private String name;
     //Level
-    int level = 1;
+    private int level;
 
     //TODO: LevelAttributes
 
     //Equipment
-    String[] equipment; //TODO: FIX THIS
+    private String[] equipment; //TODO: FIX THIS
 
     //ValidWeaponTypes
-    String[] validWeaponTypes; //TODO: FIX THIS
+    private String[] validWeaponTypes; //TODO: FIX THIS
 
     //ValidArmorTypes
-    String[] validArmorTypes; //TODO: FIX THIS
+    private String[] validArmorTypes; //TODO: FIX THIS
 
     //
-    HeroAttributes heroAttributes;
+    public HeroAttributes heroAttributes;
 
-
+    public HashMap<Slot, WeaponType> weaponMap = new HashMap<Slot,WeaponType>();
 
     //_________________________________________________________
     //constructor – each hero is created by passing just a name
 
-
-
     public Hero(String name) {
+
 
         this.name = name;
         this.level = 1;
@@ -53,7 +57,7 @@ abstract class Hero {
     public abstract void damage();
 
 
-    //TOOD: TotalAtribute- calculated on the fly and not stored
+    //TODO: TotalAtribute- calculated on the fly and not stored
     public abstract void totalAttribute();
 
 
