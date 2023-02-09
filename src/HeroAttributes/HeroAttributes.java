@@ -5,6 +5,11 @@ public class HeroAttributes {
     int dexterity;
     int intelligence;
 
+    int armourAttribute;
+
+    public HeroAttributes() {
+
+    }
 
     public HeroAttributes(int strength, int dexterity, int intelligence) {
         this.strength = strength;

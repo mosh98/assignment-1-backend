@@ -1,8 +1,14 @@
 package hero;
 
 import HeroAttributes.HeroAttributes;
+import HeroExceptions.ArmorException;
+import HeroExceptions.WeaponExceptions;
+import Items.Armor.Armor;
+import Items.Armor.ArmorTypes;
+import Items.Item;
 import Items.Slot;
-import Items.WeaponType;
+import Items.Weapons.Weapon;
+import Items.Weapons.WeaponType;
 
 import java.util.HashMap;
 
@@ -17,51 +23,121 @@ abstract class Hero {
     //TODO: LevelAttributes
 
     //Equipment
-    private String[] equipment; //TODO: FIX THIS
 
     //ValidWeaponTypes
-    private String[] validWeaponTypes; //TODO: FIX THIS
+    private WeaponType[] validWeaponTypes; //TODO: FIX THIS
 
     //ValidArmorTypes
-    private String[] validArmorTypes; //TODO: FIX THIS
+    private ArmorTypes[] validArmorTypes; //TODO: FIX THIS
 
     //
     public HeroAttributes heroAttributes;
 
-    public HashMap<Slot, WeaponType> weaponMap = new HashMap<Slot,WeaponType>();
+    public HashMap<Slot, Item> equipment = new HashMap<Slot,Item>();
 
     //_________________________________________________________
     //constructor – each hero is created by passing just a name
 
-    public Hero(String name) {
 
-
+    public Hero(String name, int level, WeaponType[] validWeaponTypes, ArmorTypes[] validArmorTypes) {
         this.name = name;
-        this.level = 1;
-        this.equipment = new String[2];
-        this.equipment[0] = "None";
-        this.equipment[1] = "None";
-        this.heroAttributes = null;
+        this.level = level;
+        this.validWeaponTypes = validWeaponTypes;
+        this.validArmorTypes = validArmorTypes;
+        this.heroAttributes = new HeroAttributes();
+
+        //
+        equipment.put(Slot.WEAPON,null);
+        equipment.put(Slot.HEAD,null);
+        equipment.put(Slot.LEGS,null);
+        equipment.put(Slot.BODY,null);
     }
 
-
-    //Levelup - increases the level of a character by 1 and increases their LevelAttributes
-    public  void levelUp(){
-        this.level++;
+    public HashMap<Slot, Item> getEquipment() {
+        return equipment;
     }
 
-    //TODO: Equip - two variants, for equipping armor and weapons
-    public abstract void equip();
+    public void equip(Item weaponOrArmor) throws ArmorException, WeaponExceptions {
+        /**
+         * @param weaponOrArmor
+         * @throws ArmorException
+         * @throws WeaponException
+         * 1. Check if the item is a weapon or armor
+         * 2. Check if the item(either armor or weapon) is valid for the hero
+         * 3. if not throw approriate error
+         * 4. otherwise, Equip the item and put it in the equipment HashMap
+         */
 
-    //TODO:damage-damage is calculated on the fly and not stored
-    public abstract void damage();
 
 
-    //TODO: TotalAtribute- calculated on the fly and not stored
-    public abstract void totalAttribute();
+        if(weaponOrArmor instanceof Weapon){
+
+            //controll if the weapon is valid
+            if(weaponOrArmor.getRequiredLevel() <= this.level) {
+                //controll if the weapon is valid
+                for (WeaponType validWeaponType : validWeaponTypes) {
+                    //this if statement check if slot is weapon and if the weapon type is valid for the hero
+
+                    if (validWeaponType == ((Weapon) weaponOrArmor).getWeaponType()) {
+                        if(weaponOrArmor.getSlot() == Slot.WEAPON) {
+                            equipment.put(Slot.WEAPON, weaponOrArmor);
+                        }
+                        break;
+
+                    }else {
+                        //throw
+                        throw new WeaponExceptions("Weapon TYPE Exception");
+                    }
+                }
+
+            }else {
+
+                throw new WeaponExceptions("Weapon Required Level Exception");
+            }
 
 
-    //TODO: Display -details of hero.Hero to be displayed
-    public abstract void display();
+        }
 
+        //the exact same exception format but for armour
+            if(weaponOrArmor instanceof Armor){
+
+            //controll if the armor is valid
+            if(weaponOrArmor.getRequiredLevel() <= this.level) { //check level requirement
+
+                for (int i = 0; i < validArmorTypes.length; i++) {
+
+                    ArmorTypes validArmorType = validArmorTypes[i];
+                    if (validArmorType == ((Armor) weaponOrArmor).getArmorTypes()) {
+                        System.out.println("VALID ARMOR TYPE:"+validArmorType);
+                        System.out.println("ARMOR TYPE:"+ ((Armor) weaponOrArmor).getArmorTypes().toString()  );
+                        System.out.println(weaponOrArmor.getSlot());
+
+                        if(weaponOrArmor.getSlot() == Slot.HEAD) {
+                            equipment.put(Slot.HEAD, weaponOrArmor);
+                            break;
+                        }else if(weaponOrArmor.getSlot() == Slot.BODY) {
+                            equipment.put(Slot.BODY, weaponOrArmor);
+                            break;
+                        }else if(weaponOrArmor.getSlot() == Slot.LEGS) {
+                            equipment.put(Slot.LEGS,  weaponOrArmor);
+                            break;
+                        }
+
+                    }
+                    if(i == validArmorTypes.length ) {
+                        throw new ArmorException("Armor TYPE Exception");
+                    }
+                }
+            }else {
+                //throw armour exception
+                throw new ArmorException("Armor Required Level Exception");
+            }
+        }
+
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }
