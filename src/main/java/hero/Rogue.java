@@ -14,6 +14,14 @@ public class Rogue extends Hero{
         this.heroAttributes.setIntelligence(1);
     }
 
+    @Override
+    public void increaseLevel() {
+        super.setLevel(super.getLevel()+1);
+        this.heroAttributes.setStrength(this.heroAttributes.getStrength()+1);
+        this.heroAttributes.setDexterity(this.heroAttributes.getDexterity()+4);
+        this.heroAttributes.setIntelligence(this.heroAttributes.getIntelligence()+1);
+    }
+
 
 
 }

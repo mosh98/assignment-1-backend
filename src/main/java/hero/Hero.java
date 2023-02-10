@@ -12,7 +12,7 @@ import Items.Weapons.WeaponType;
 
 import java.util.HashMap;
 
-abstract class Hero {
+public abstract class Hero {
 
     //fields GENREAL:
     //Name
@@ -29,6 +29,7 @@ abstract class Hero {
 
     //ValidArmorTypes
     private ArmorTypes[] validArmorTypes; //TODO: FIX THIS
+
 
     //
     public HeroAttributes heroAttributes;
@@ -57,6 +58,21 @@ abstract class Hero {
         return equipment;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public abstract void increaseLevel();
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+
     public void equip(Item weaponOrArmor) throws ArmorException, WeaponExceptions {
         /**
          * @param weaponOrArmor
@@ -68,8 +84,6 @@ abstract class Hero {
          * 4. otherwise, Equip the item and put it in the equipment HashMap
          */
 
-
-
         if(weaponOrArmor instanceof Weapon){
 
             //controll if the weapon is valid
@@ -77,25 +91,19 @@ abstract class Hero {
                 //controll if the weapon is valid
                 for (WeaponType validWeaponType : validWeaponTypes) {
                     //this if statement check if slot is weapon and if the weapon type is valid for the hero
-
                     if (validWeaponType == ((Weapon) weaponOrArmor).getWeaponType()) {
                         if(weaponOrArmor.getSlot() == Slot.WEAPON) {
                             equipment.put(Slot.WEAPON, weaponOrArmor);
                         }
                         break;
-
                     }else {
                         //throw
                         throw new WeaponExceptions("Weapon TYPE Exception");
                     }
                 }
-
             }else {
-
                 throw new WeaponExceptions("Weapon Required Level Exception");
             }
-
-
         }
 
         //the exact same exception format but for armour
@@ -135,6 +143,11 @@ abstract class Hero {
         }
 
     }
+    public HeroAttributes getHeroAttributes() {
+        return heroAttributes;
+    }
+
+
 
     @Override
     public int hashCode() {

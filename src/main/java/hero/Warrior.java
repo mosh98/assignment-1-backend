@@ -20,5 +20,11 @@ public class Warrior extends Hero{
 
     }
 
-
+    @Override
+    public void increaseLevel() {
+        super.setLevel(super.getLevel()+1);
+        this.heroAttributes.setStrength(this.heroAttributes.getStrength()+3);
+        this.heroAttributes.setDexterity(this.heroAttributes.getDexterity()+2);
+        this.heroAttributes.setIntelligence(this.heroAttributes.getIntelligence()+1);
+    }
 }
