@@ -3,16 +3,16 @@ import HeroExceptions.WeaponExceptions;
 import Items.Armor.Armor;
 import Items.Armor.ArmorAttribute;
 import Items.Armor.ArmorTypes;
-import Items.Slot;
 import Items.Item;
+import Items.Slot;
 import Items.Weapons.Weapon;
 import Items.Weapons.WeaponType;
-
 import hero.Hero;
 import hero.Warrior;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class WarriorTest {
 

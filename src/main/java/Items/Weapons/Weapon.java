@@ -30,4 +30,6 @@ public class Weapon extends Item {
     public void setWeaponDamage(int weaponDamage) {
         this.weaponDamage = weaponDamage;
     }
+
+
 }

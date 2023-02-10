@@ -1,6 +1,8 @@
 package hero;
 
 import Items.Armor.ArmorTypes;
+import Items.Slot;
+import Items.Weapons.Weapon;
 import Items.Weapons.WeaponType;
 
 public class Mage extends Hero{
@@ -21,5 +23,17 @@ public class Mage extends Hero{
         this.heroAttributes.setStrength(this.heroAttributes.getStrength()+1);
         this.heroAttributes.setDexterity(this.heroAttributes.getDexterity()+1);
         this.heroAttributes.setIntelligence(this.heroAttributes.getIntelligence()+5);
+    }
+
+    @Override
+    public int calcDamage() {
+        int weaponDmg = 1;
+        //check if weapon is equipped
+        if(super.getEquipment().get(Slot.WEAPON) != null){
+
+            weaponDmg = ((Weapon) super.getEquipment().get(Slot.WEAPON)).getWeaponDamage();
+        }
+        int heroDmg = weaponDmg * ( (1 + this.heroAttributes.getIntelligence() )  /100);
+        return heroDmg;
     }
 }

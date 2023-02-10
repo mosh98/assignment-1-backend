@@ -39,7 +39,6 @@ public abstract class Hero {
     //_________________________________________________________
     //constructor – each hero is created by passing just a name
 
-
     public Hero(String name, int level, WeaponType[] validWeaponTypes, ArmorTypes[] validArmorTypes) {
         this.name = name;
         this.level = level;
@@ -147,6 +146,23 @@ public abstract class Hero {
         return heroAttributes;
     }
 
+    public int calcTotalAttributes(){
+        int sumOfCurrentHeroAttributes = this.getHeroAttributes().getStrength()+this.getHeroAttributes().getDexterity()+this.getHeroAttributes().getIntelligence();
+        int sumOfCurrentAromorAttributes = 0;
+        //iterate through the equipment hashmap
+        for (Item item : equipment.values()) {
+            if(item != null && item.getSlot() != Slot.WEAPON) { //re-configure the if statement
+                sumOfCurrentAromorAttributes += ((Armor) item).getArmorAttribute().getStrength() + ((Armor) item).getArmorAttribute().getDexterity() + ((Armor) item).getArmorAttribute().getIntelligence();
+            }
+        }
+
+        return sumOfCurrentHeroAttributes + sumOfCurrentAromorAttributes;
+    }
+
+    public abstract int calcDamage();
+
+
+    //TODO: Show HERO desplay. Make it abstract class.
 
 
     @Override

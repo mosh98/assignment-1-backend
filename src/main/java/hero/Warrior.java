@@ -1,6 +1,8 @@
 package hero;
 
 import Items.Armor.ArmorTypes;
+import Items.Slot;
+import Items.Weapons.Weapon;
 import Items.Weapons.WeaponType;
 
 import java.util.ArrayList;
@@ -26,5 +28,20 @@ public class Warrior extends Hero{
         this.heroAttributes.setStrength(this.heroAttributes.getStrength()+3);
         this.heroAttributes.setDexterity(this.heroAttributes.getDexterity()+2);
         this.heroAttributes.setIntelligence(this.heroAttributes.getIntelligence()+1);
+    }
+
+    @Override
+    public int calcDamage() {
+        int weaponDmg = 1;
+
+        //check if weapon is equipped
+        if(super.getEquipment().get(Slot.WEAPON) != null) {
+
+            weaponDmg = ((Weapon) super.getEquipment().get(Slot.WEAPON)).getWeaponDamage();
+        }
+
+        int heroDmg = weaponDmg * ( (1 + this.heroAttributes.getStrength() )  /100);
+
+        return heroDmg;
     }
 }

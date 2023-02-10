@@ -1,6 +1,8 @@
 package hero;
 
 import Items.Armor.ArmorTypes;
+import Items.Slot;
+import Items.Weapons.Weapon;
 import Items.Weapons.WeaponType;
 
 public class Ranger extends Hero{
@@ -24,4 +26,15 @@ public class Ranger extends Hero{
 
     }
 
+    @Override
+    public int calcDamage() {
+        int weaponDmg = 1;
+        //check if weapon is equipped
+        if(super.getEquipment().get(Slot.WEAPON) != null){
+
+            weaponDmg = ((Weapon)super.getEquipment().get(Slot.WEAPON)).getWeaponDamage();
+        }
+        int heroDmg = weaponDmg * ( (1 + this.heroAttributes.getDexterity() )  /100);
+        return heroDmg;
+    }
 }
