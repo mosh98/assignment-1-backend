@@ -34,7 +34,9 @@ public class Ranger extends Hero{
 
             weaponDmg = ((Weapon)super.getEquipment().get(Slot.WEAPON)).getWeaponDamage();
         }
-        int heroDmg = weaponDmg * ( (1 + this.heroAttributes.getDexterity() )  /100);
-        return heroDmg;
+
+        float heroDmg = weaponDmg * ((float)  (1 + (this.heroAttributes.getDexterity()  /100)));
+
+        return (int) heroDmg;
     }
 }

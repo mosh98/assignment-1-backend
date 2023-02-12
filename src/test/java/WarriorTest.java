@@ -117,6 +117,33 @@ public class WarriorTest {
         assertEquals(2,heroWarrior.getHeroAttributes().getIntelligence());
     }
 
+    //test for calcDamage
+    @Test
+    public void calcDamageCheckWithWeapon(){
+        //Warrrior has level 1
+        //Equip Axe with damage 2
+        //Strength is 5
+
+        Hero heroWarrior = new Warrior("Mosleh");
+
+        Item weapon = new Weapon("Common Axe",1, Slot.WEAPON, WeaponType.AXES,2);
+
+        try {
+
+            heroWarrior.equip(weapon);
+
+
+        } catch (WeaponExceptions | ArmorException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println(heroWarrior.calcDamage());
+        int expectedDmg = 2*(1+(5/100));
+
+        assertEquals(expectedDmg,heroWarrior.calcDamage());
+    }
+
+
 
 
 }

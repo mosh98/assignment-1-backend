@@ -30,10 +30,12 @@ public class Rogue extends Hero{
         //check if weapon is equipped
         if(super.getEquipment().get(Slot.WEAPON) != null){
 
+
             weaponDmg = ((Weapon) super.getEquipment().get(Slot.WEAPON)).getWeaponDamage();
         }
-        int heroDmg = weaponDmg * ( (1 + this.heroAttributes.getDexterity() )  /100);
-        return heroDmg;
+
+        float heroDmg = weaponDmg * ((float)  (1 + (this.heroAttributes.getDexterity()  /100)));
+        return (int) heroDmg;
     }
 
 

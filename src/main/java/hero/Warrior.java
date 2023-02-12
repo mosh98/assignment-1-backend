@@ -36,12 +36,10 @@ public class Warrior extends Hero{
 
         //check if weapon is equipped
         if(super.getEquipment().get(Slot.WEAPON) != null) {
-
             weaponDmg = ((Weapon) super.getEquipment().get(Slot.WEAPON)).getWeaponDamage();
         }
+        float heroDmg = weaponDmg * ((float)  (1 + (this.heroAttributes.getStrength()  /100)));
 
-        int heroDmg = weaponDmg * ( (1 + this.heroAttributes.getStrength() )  /100);
-
-        return heroDmg;
+        return (int) heroDmg;
     }
 }

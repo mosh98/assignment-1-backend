@@ -49,6 +49,7 @@ public class WeaponTest {
 
         //assert of is the armor in the equipment hashmap
         assertEquals(armor,heroWarrior.getEquipment().get(Slot.BODY));
-
     }
+
+
 }

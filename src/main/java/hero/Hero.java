@@ -73,6 +73,7 @@ public abstract class Hero {
 
 
     public void equip(Item weaponOrArmor) throws ArmorException, WeaponExceptions {
+
         /**
          * @param weaponOrArmor
          * @throws ArmorException
@@ -115,9 +116,6 @@ public abstract class Hero {
 
                     ArmorTypes validArmorType = validArmorTypes[i];
                     if (validArmorType == ((Armor) weaponOrArmor).getArmorTypes()) {
-                        System.out.println("VALID ARMOR TYPE:"+validArmorType);
-                        System.out.println("ARMOR TYPE:"+ ((Armor) weaponOrArmor).getArmorTypes().toString()  );
-                        System.out.println(weaponOrArmor.getSlot());
 
                         if(weaponOrArmor.getSlot() == Slot.HEAD) {
                             equipment.put(Slot.HEAD, weaponOrArmor);

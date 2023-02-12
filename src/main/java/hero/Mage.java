@@ -33,7 +33,7 @@ public class Mage extends Hero{
 
             weaponDmg = ((Weapon) super.getEquipment().get(Slot.WEAPON)).getWeaponDamage();
         }
-        int heroDmg = weaponDmg * ( (1 + this.heroAttributes.getIntelligence() )  /100);
-        return heroDmg;
+        float heroDmg = weaponDmg * ((float)  (1 + (this.heroAttributes.getIntelligence()  /100)));
+        return (int) heroDmg;
     }
 }
