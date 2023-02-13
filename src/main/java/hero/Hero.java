@@ -102,7 +102,7 @@ public abstract class Hero {
                     }
                 }
             }else {
-                throw new WeaponExceptions("Weapon Required Level Exception");
+                throw new WeaponExceptions("Hero level is lower than required level of weapon");
             }
         }
 
@@ -129,17 +129,18 @@ public abstract class Hero {
                         }
 
                     }
-                    if(i == validArmorTypes.length ) {
-                        throw new ArmorException("Armor TYPE Exception");
+                    if(i == validArmorTypes.length-1 ) {
+                        throw new ArmorException("Armor type is not compatible with hero class");
                     }
                 }
             }else {
                 //throw armour exception
-                throw new ArmorException("Armor Required Level Exception");
+                throw new ArmorException("Hero level is not enough to equip this armor");
             }
         }
 
     }
+
     public HeroAttributes getHeroAttributes() {
         return heroAttributes;
     }
@@ -147,6 +148,7 @@ public abstract class Hero {
     public int calcTotalAttributes(){
         int sumOfCurrentHeroAttributes = this.getHeroAttributes().getStrength()+this.getHeroAttributes().getDexterity()+this.getHeroAttributes().getIntelligence();
         int sumOfCurrentAromorAttributes = 0;
+
         //iterate through the equipment hashmap
         for (Item item : equipment.values()) {
             if(item != null && item.getSlot() != Slot.WEAPON) { //re-configure the if statement
@@ -160,8 +162,7 @@ public abstract class Hero {
     public abstract int calcDamage();
 
 
-    //TODO: Show HERO desplay. Make it abstract class.
-
+    //TODO: Show HERO display. Make it abstract class.
 
     @Override
     public int hashCode() {

@@ -1,3 +1,5 @@
+package hero;
+
 import HeroExceptions.ArmorException;
 import HeroExceptions.WeaponExceptions;
 import Items.Armor.Armor;
@@ -41,7 +43,7 @@ public class WarriorTest {
      */
     //equipArmorLvlControll
     @Test
-    public void equipArmorLvlControll(){
+    public void equipArmorLvlControll() throws ArmorException {
         ArmorAttribute armorAttribute = new ArmorAttribute(1,0,0);
         Item armor = new Armor("Common Plate Chest",10,Slot.BODY, ArmorTypes.PLATE,armorAttribute);
         Hero heroWarrior = new Warrior("Mosleh"); //Warrior has to have a weapon
@@ -124,24 +126,26 @@ public class WarriorTest {
         //Equip Axe with damage 2
         //Strength is 5
 
+        //Arrange
         Hero heroWarrior = new Warrior("Mosleh");
 
         Item weapon = new Weapon("Common Axe",1, Slot.WEAPON, WeaponType.AXES,2);
 
+        //ACT
         try {
-
             heroWarrior.equip(weapon);
-
 
         } catch (WeaponExceptions | ArmorException e) {
             throw new RuntimeException(e);
         }
 
-        System.out.println(heroWarrior.calcDamage());
+//        System.out.println(heroWarrior.calcDamage());
         int expectedDmg = 2*(1+(5/100));
 
         assertEquals(expectedDmg,heroWarrior.calcDamage());
     }
+
+
 
 
 
