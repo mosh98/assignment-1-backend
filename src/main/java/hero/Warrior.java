@@ -1,5 +1,6 @@
 package hero;
 
+import HeroExceptions.HeroException;
 import Items.Armor.ArmorTypes;
 import Items.Slot;
 import Items.Weapons.Weapon;
@@ -10,7 +11,7 @@ import java.util.Objects;
 
 public class Warrior extends Hero{
 
-    public Warrior(String name) {
+    public Warrior(String name) throws HeroException {
         //TODO: FIX 2nd argument EQUIPMENT
         super(name,1,
                 new WeaponType[] {WeaponType.AXES,WeaponType.HAMMERS,WeaponType.SWORDS},

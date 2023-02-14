@@ -1,5 +1,6 @@
 package hero;
 
+import HeroExceptions.HeroException;
 import Items.Armor.ArmorTypes;
 import Items.Slot;
 import Items.Weapons.Weapon;
@@ -7,8 +8,10 @@ import Items.Weapons.WeaponType;
 
 public class Ranger extends Hero{
 
-    public Ranger(String name) {
-        //TODO: set initial hero attributes
+    public Ranger(String name) throws HeroException {
+        /**
+         * Constructor for the given HERO accoriding to the requirements
+         */
         super(name,1,
                 new WeaponType[] {WeaponType.BOWS},
                 new ArmorTypes[]{ArmorTypes.LEATHER,ArmorTypes.MAIL});
@@ -19,6 +22,12 @@ public class Ranger extends Hero{
 
     @Override
     public void increaseLevel() {
+        /**
+         * Increase the attributes for the given HERO accoriding to the requirements
+         * Ranger increases level by 1
+         * Ranger increases strength by 1
+         * Ranger increases dexterity by 5
+         */
         super.setLevel(super.getLevel()+1);
         this.heroAttributes.setStrength(this.heroAttributes.getStrength()+1);
         this.heroAttributes.setDexterity(this.heroAttributes.getDexterity()+5);

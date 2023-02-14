@@ -2,6 +2,7 @@ package hero;
 
 import HeroAttributes.HeroAttributes;
 import HeroExceptions.ArmorException;
+import HeroExceptions.HeroException;
 import HeroExceptions.WeaponExceptions;
 import Items.Armor.Armor;
 import Items.Armor.ArmorTypes;
@@ -20,15 +21,14 @@ public abstract class Hero {
     //Level
     private int level;
 
-    //TODO: LevelAttributes
 
     //Equipment
 
     //ValidWeaponTypes
-    private WeaponType[] validWeaponTypes; //TODO: FIX THIS
+    private WeaponType[] validWeaponTypes;
 
     //ValidArmorTypes
-    private ArmorTypes[] validArmorTypes; //TODO: FIX THIS
+    private ArmorTypes[] validArmorTypes;
 
 
     //
@@ -36,21 +36,30 @@ public abstract class Hero {
 
     public HashMap<Slot, Item> equipment = new HashMap<Slot,Item>();
 
-    //_________________________________________________________
     //constructor – each hero is created by passing just a name
+    public Hero(String name, int level, WeaponType[] validWeaponTypes, ArmorTypes[] validArmorTypes) throws HeroException {
 
-    public Hero(String name, int level, WeaponType[] validWeaponTypes, ArmorTypes[] validArmorTypes) {
-        this.name = name;
+        if(checkName(name) == true){
+            this.name = name;
+        }else {
+            throw new HeroException("Invalid Name");
+        }
+
         this.level = level;
         this.validWeaponTypes = validWeaponTypes;
         this.validArmorTypes = validArmorTypes;
         this.heroAttributes = new HeroAttributes();
 
-        //
         equipment.put(Slot.WEAPON,null);
         equipment.put(Slot.HEAD,null);
         equipment.put(Slot.LEGS,null);
         equipment.put(Slot.BODY,null);
+    }
+    public boolean checkName(String name){
+
+
+        return name.matches("[a-zA-Z- ]+");
+
     }
 
     public HashMap<Slot, Item> getEquipment() {
@@ -73,14 +82,13 @@ public abstract class Hero {
 
 
     public void equip(Item weaponOrArmor) throws ArmorException, WeaponExceptions {
-
         /**
          * @param weaponOrArmor
          * @throws ArmorException
          * @throws WeaponException
          * 1. Check if the item is a weapon or armor
          * 2. Check if the item(either armor or weapon) is valid for the hero
-         * 3. if not throw approriate error
+         * 3. if not throw appropriate error
          * 4. otherwise, Equip the item and put it in the equipment HashMap
          */
 
@@ -106,6 +114,7 @@ public abstract class Hero {
             }
         }
 
+        //TODO: Add the attributes from equipped armor to current hero attributes
         //the exact same exception format but for armour
             if(weaponOrArmor instanceof Armor){
 
@@ -115,20 +124,41 @@ public abstract class Hero {
                 for (int i = 0; i < validArmorTypes.length; i++) {
 
                     ArmorTypes validArmorType = validArmorTypes[i];
+
                     if (validArmorType == ((Armor) weaponOrArmor).getArmorTypes()) {
 
                         if(weaponOrArmor.getSlot() == Slot.HEAD) {
-                            equipment.put(Slot.HEAD, weaponOrArmor);
-                            break;
-                        }else if(weaponOrArmor.getSlot() == Slot.BODY) {
-                            equipment.put(Slot.BODY, weaponOrArmor);
-                            break;
-                        }else if(weaponOrArmor.getSlot() == Slot.LEGS) {
-                            equipment.put(Slot.LEGS,  weaponOrArmor);
-                            break;
-                        }
 
+                            if(equipment.get(Slot.HEAD) != null) {
+                                removeArmorAttributeFromHero((Armor) equipment.get(Slot.HEAD));
+                            }
+
+                            equipment.put(Slot.HEAD, weaponOrArmor);
+                            addArmorAttributeToHero((Armor) weaponOrArmor); //add armor attributes to hero
+
+                            break;
+
+                        }else if(weaponOrArmor.getSlot() == Slot.BODY) {
+
+                            if(equipment.get(Slot.BODY) != null) {
+                                removeArmorAttributeFromHero((Armor) equipment.get(Slot.BODY));
+                            }
+                            equipment.put(Slot.BODY, weaponOrArmor);
+                            addArmorAttributeToHero((Armor) weaponOrArmor);
+                            break;
+
+                        }else if(weaponOrArmor.getSlot() == Slot.LEGS) {
+
+                            if(equipment.get(Slot.LEGS) != null) {
+                                removeArmorAttributeFromHero((Armor) equipment.get(Slot.LEGS));
+                            }
+                            equipment.put(Slot.LEGS, weaponOrArmor);
+                            addArmorAttributeToHero((Armor) weaponOrArmor);
+                            break;
+
+                        }
                     }
+
                     if(i == validArmorTypes.length-1 ) {
                         throw new ArmorException("Armor type is not compatible with hero class");
                     }
@@ -138,6 +168,19 @@ public abstract class Hero {
                 throw new ArmorException("Hero level is not enough to equip this armor");
             }
         }
+    }
+
+  private void addArmorAttributeToHero(Armor armor){
+      this.heroAttributes.setStrength(this.heroAttributes.getStrength() + armor.getArmorAttribute().getStrength());
+      this.heroAttributes.setDexterity(this.heroAttributes.getDexterity() + armor.getArmorAttribute().getDexterity());
+      this.heroAttributes.setIntelligence(this.heroAttributes.getIntelligence() + armor.getArmorAttribute().getIntelligence()); }
+
+    //remove previous armor attributes from hero
+    private void removeArmorAttributeFromHero(Armor armor){
+
+        this.heroAttributes.setStrength(this.heroAttributes.getStrength() - armor.getArmorAttribute().getStrength());
+        this.heroAttributes.setDexterity(this.heroAttributes.getDexterity() - armor.getArmorAttribute().getDexterity());
+        this.heroAttributes.setIntelligence(this.heroAttributes.getIntelligence() - armor.getArmorAttribute().getIntelligence());
 
     }
 
@@ -146,10 +189,12 @@ public abstract class Hero {
     }
 
     public int calcTotalAttributes(){
-        int sumOfCurrentHeroAttributes = this.getHeroAttributes().getStrength()+this.getHeroAttributes().getDexterity()+this.getHeroAttributes().getIntelligence();
+
+        int sumOfCurrentHeroAttributes = this.getHeroAttributes().getStrength()+ this.getHeroAttributes().getDexterity()+ this.getHeroAttributes().getIntelligence();
         int sumOfCurrentAromorAttributes = 0;
 
         //iterate through the equipment hashmap
+
         for (Item item : equipment.values()) {
             if(item != null && item.getSlot() != Slot.WEAPON) { //re-configure the if statement
                 sumOfCurrentAromorAttributes += ((Armor) item).getArmorAttribute().getStrength() + ((Armor) item).getArmorAttribute().getDexterity() + ((Armor) item).getArmorAttribute().getIntelligence();
@@ -161,9 +206,7 @@ public abstract class Hero {
 
     public abstract int calcDamage();
 
-
     //TODO: Show HERO display. Make it abstract class.
-
     @Override
     public int hashCode() {
         return super.hashCode();

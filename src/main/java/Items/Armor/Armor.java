@@ -29,7 +29,4 @@ public class Armor extends Item {
         return armorAttribute;
     }
 
-    public void setArmorAttribute(ArmorAttribute armorAttribute) {
-        this.armorAttribute = armorAttribute;
-    }
 }

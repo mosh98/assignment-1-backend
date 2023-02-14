@@ -1,5 +1,6 @@
 package Items;
 
+import HeroExceptions.HeroException;
 import Items.Weapons.Weapon;
 import Items.Weapons.WeaponType;
 import hero.Hero;
@@ -11,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class WeaponTest {
 
     @Test
-    public void equipWeapon(){
+    public void equipWeapon() throws HeroException {
 
         Item weapon = new Weapon("Common Axe",1, Slot.WEAPON, WeaponType.AXES,2);
         Hero heroWarrior = new Warrior("Mosleh"); //Warrior has to have a weapon

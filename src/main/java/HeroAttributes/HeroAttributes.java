@@ -22,6 +22,7 @@ public class HeroAttributes {
     *    methods to add two instances together and return the sum OR increase the one instance by a specified amount. Which
     *    to use is up to you on what best suits your solution. */
 
+
     public void setStrength(int strength) {
         this.strength = strength;
     }

@@ -1,9 +1,13 @@
 package Items;
 
 import HeroExceptions.ArmorException;
+import HeroExceptions.HeroException;
+import HeroExceptions.WeaponExceptions;
 import Items.Armor.Armor;
 import Items.Armor.ArmorAttribute;
 import Items.Armor.ArmorTypes;
+import Items.Weapons.Weapon;
+import Items.Weapons.WeaponType;
 import hero.*;
 import org.junit.Test;
 
@@ -23,7 +27,7 @@ public class ArmorTest {
 
     //test for equipment of armor  & checking the equipment hasmap if it exist
     @Test
-    public void equipArmor_checkSlot_TRUE() throws ArmorException {
+    public void equipArmor_checkSlot_TRUE() throws ArmorException, HeroException {
         ArmorAttribute armorAttribute = new ArmorAttribute(1,0,0);
         Item armor = new Armor("Common Plate Chest",1,Slot.BODY, ArmorTypes.PLATE,armorAttribute);
         Hero heroWarrior = new Warrior("Mosleh"); //Warrior has to have a weapon
@@ -44,7 +48,7 @@ public class ArmorTest {
     //check if armor throws exception when trying to equip armor of wrong type for Warrior
     //@Warrior
     @Test
-    public void equipArmor_WrongType_ShouldThrowException() throws ArmorException {
+    public void equipArmor_WrongType_ShouldThrowException() throws ArmorException, HeroException {
         //Arrange
         ArmorAttribute armorAttribute = new ArmorAttribute(1,0,0);
         Item armor = new Armor("Common Plate Chest",0,Slot.BODY, ArmorTypes.LEATHER,armorAttribute);
@@ -66,7 +70,7 @@ public class ArmorTest {
     //check if armor throws exception when trying to equip armor of wrong type for Mage
     //@Mage
     @Test
-    public void mageEqiupArmor_WrongType_ShouldThrowException() throws ArmorException {
+    public void mageEqiupArmor_WrongType_ShouldThrowException() throws ArmorException, HeroException {
         //Arrange
         ArmorAttribute armorAttribute = new ArmorAttribute(1,0,0);
         Item armor = new Armor("Common Plate Chest",0,Slot.BODY, ArmorTypes.PLATE,armorAttribute);
@@ -86,7 +90,7 @@ public class ArmorTest {
     //check if armor throws exception when trying to equip armor of wrong type for Rogue
     //@Rogue
     @Test //rogueEqiupArmor_WrongType_ShouldThrowException
-    public void rogueEqiupArmor_WrongType_ShouldThrowException() throws ArmorException {
+    public void rogueEqiupArmor_WrongType_ShouldThrowException() throws ArmorException, HeroException {
         ArmorAttribute armorAttribute = new ArmorAttribute(1,0,0);
         Item armor = new Armor("Common Plate Chest",0,Slot.BODY, ArmorTypes.PLATE,armorAttribute);
         Hero heroWarrior = new Rogue("Rogue"); //Warrior has to have a weapon
@@ -104,7 +108,7 @@ public class ArmorTest {
     //check if armor throws exception when trying to equip armor of wrong type for Ranger
     //@Ranger
     @Test
-    public void rangerEqiupArmor_WrongType_ShouldThrowException() throws ArmorException {
+    public void rangerEqiupArmor_WrongType_ShouldThrowException() throws ArmorException, HeroException {
         //Arrange
         ArmorAttribute armorAttribute = new ArmorAttribute(1,0,0);
         Item armor = new Armor("Common Plate Chest",0,Slot.BODY, ArmorTypes.PLATE,armorAttribute);
@@ -149,7 +153,7 @@ public class ArmorTest {
     //check if Mage Hero can equip armor of higher level
     //@Mage
     @Test
-    public void mageEquipArmor_HigherLevel_ShouldThrowException() throws ArmorException {
+    public void mageEquipArmor_HigherLevel_ShouldThrowException() throws ArmorException, HeroException {
         //Arrange
         ArmorAttribute armorAttribute = new ArmorAttribute(1,0,0);
         Item armor = new Armor("Common Plate Chest",3,Slot.BODY, ArmorTypes.PLATE,armorAttribute);
@@ -169,7 +173,7 @@ public class ArmorTest {
     //check if Warrior Hero can equip armor of higher level
     //@Warrior
     @Test
-    public void warriorEquipArmor_HigherLevel_ShouldThrowException() throws ArmorException {
+    public void warriorEquipArmor_HigherLevel_ShouldThrowException() throws ArmorException, HeroException {
 
         //Arrange
         ArmorAttribute armorAttribute = new ArmorAttribute(1,0,0);
@@ -190,7 +194,7 @@ public class ArmorTest {
     //check if Rogue Hero can equip armor of higher level
     //@Rogue
     @Test
-    public void rogueEquipArmor_HigherLevel_ShouldThrowException() throws ArmorException {
+    public void rogueEquipArmor_HigherLevel_ShouldThrowException() throws ArmorException, HeroException {
         //Arrange
         ArmorAttribute armorAttribute = new ArmorAttribute(1,0,0);
         Item armor = new Armor("Common Plate Chest",3,Slot.BODY, ArmorTypes.MAIL,armorAttribute);
@@ -210,7 +214,7 @@ public class ArmorTest {
     //check if Ranger Hero can equip armor of higher level
     //@Ranger
     @Test
-    public void rangerEquipArmor_HigherLevel_ShouldThrowException() throws ArmorException {
+    public void rangerEquipArmor_HigherLevel_ShouldThrowException() throws ArmorException, HeroException {
         //Arrange
         ArmorAttribute armorAttribute = new ArmorAttribute(1,0,0);
         Item armor = new Armor("Common Plate Chest",3,Slot.BODY, ArmorTypes.LEATHER,armorAttribute);
@@ -230,7 +234,7 @@ public class ArmorTest {
     //check if Mage Hero can equip armor of higher level
     //@Mage
     @Test
-    public void mageEquipArmor_LowerLevel_ShouldThrowException() throws ArmorException {
+    public void mageEquipArmor_LowerLevel_ShouldThrowException() throws ArmorException, HeroException {
         //Arrange
         ArmorAttribute armorAttribute = new ArmorAttribute(1,0,0);
         Item armor = new Armor("Common Plate Chest",3,Slot.BODY, ArmorTypes.CLOTH,armorAttribute);
@@ -247,6 +251,88 @@ public class ArmorTest {
         assertEquals(expectedMessage, actualMessage);
     }
 
+    //check Mage hero damage with no weapon
+    //@Mage
+    @Test
+    public void mageDamage_NoWeapon_ShouldThrowException() throws HeroException {
+        //Arrange
+        Hero heroMage = new Mage("Mage"); //Mage has to have a weapon
+
+        //Act & assert of armor thorws error
+        int expectedMessage = 1;
+
+        int actualMessage = heroMage.calcDamage();
+
+        //Assert
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    //check Mage hero damage with weapon after replacing weapon
+    //@Mage
+    @Test
+    public void mageDamage_WeaponAfterReplacingWeapon_ShouldThrowException() throws HeroException, WeaponExceptions, ArmorException {
+        //Arrange
+        Item weapon = new Weapon("Common Sword",0,Slot.WEAPON, WeaponType.STAFFS,3);
+        Hero heroMage = new Mage("Mage"); //Mage has to have a weapon
+
+        //Act & assert of armor thorws error
+        heroMage.equip(weapon);
+
+        Item weapon2 = new Weapon("Deluxe Sword",0,Slot.WEAPON, WeaponType.STAFFS,5);
+        heroMage.equip(weapon2);
+
+        int expectedMessage = 5;
+
+        int actualMessage = heroMage.calcDamage();
+
+        //Assert
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    //check Mage hero damage with weapon after replacing armor
+    //@Mage
+    @Test
+    public void mageDamage_WeaponAfterReplacingArmor_ShouldThrowException() throws HeroException, WeaponExceptions, ArmorException {
+        //Arrange
+        Item weapon = new Weapon("Common Sword",0,Slot.WEAPON, WeaponType.STAFFS,3);
+        Hero heroMage = new Mage("Mage"); //Mage has to have a weapon
+
+        //Act & assert of armor thorws error
+        heroMage.equip(weapon);
+
+        Item armor = new Armor("Common Plate Chest",0,Slot.BODY, ArmorTypes.CLOTH,new ArmorAttribute(1,0,0));
+        heroMage.equip(armor);
+
+        int expectedMessage = 3;
+
+        int actualMessage = heroMage.calcDamage();
+
+        //Assert
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    //check Mage hero cannot equip wrong weapon
+    //@Mage
+    @Test
+    public void mageEquipWeapon_WrongWeapon_ShouldThrowException() throws HeroException, WeaponExceptions, ArmorException {
+        //Arrange
+        Item weapon = new Weapon("Common Sword",0,Slot.WEAPON, WeaponType.SWORDS,3);
+        Hero heroMage = new Mage("Mage"); //Mage has to have a weapon
+
+        //Act & assert of armor thorws error
+        Exception exception = assertThrows(WeaponExceptions.class, () -> heroMage.equip(weapon));
+
+        String expectedMessage = "Weapon TYPE Exception";
+
+        String actualMessage = exception.getMessage();
+
+        //Assert
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+
+
+    //
 
 
 

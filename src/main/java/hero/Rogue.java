@@ -1,5 +1,6 @@
 package hero;
 
+import HeroExceptions.HeroException;
 import Items.Armor.ArmorTypes;
 import Items.Slot;
 import Items.Weapons.Weapon;
@@ -7,7 +8,7 @@ import Items.Weapons.WeaponType;
 
 public class Rogue extends Hero{
 
-    public Rogue(String name) {
+    public Rogue(String name) throws HeroException {
         super(name,1,
                 new WeaponType[] {WeaponType.DAGGERS,WeaponType.SWORDS},
                 new ArmorTypes[]{ArmorTypes.LEATHER,ArmorTypes.MAIL});

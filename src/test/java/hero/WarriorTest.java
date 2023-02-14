@@ -1,6 +1,7 @@
 package hero;
 
 import HeroExceptions.ArmorException;
+import HeroExceptions.HeroException;
 import HeroExceptions.WeaponExceptions;
 import Items.Armor.Armor;
 import Items.Armor.ArmorAttribute;
@@ -9,8 +10,6 @@ import Items.Item;
 import Items.Slot;
 import Items.Weapons.Weapon;
 import Items.Weapons.WeaponType;
-import hero.Hero;
-import hero.Warrior;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -25,7 +24,7 @@ public class WarriorTest {
      *
      */
     @Test
-    public void equipWeaponLvlControll(){
+    public void equipWeaponLvlControll() throws HeroException {
         //ArmorAttribute armorAttribute = new ArmorAttribute(1,0,0);
         //Item armor = new Armor("Common Plate Chest",0,Slot.BODY, ArmorTypes.PLATE,armorAttribute);
         Item weapon = new Weapon("Common Axe",2, Slot.WEAPON, WeaponType.AXES,2);
@@ -43,7 +42,7 @@ public class WarriorTest {
      */
     //equipArmorLvlControll
     @Test
-    public void equipArmorLvlControll() throws ArmorException {
+    public void equipArmorLvlControll() throws ArmorException, HeroException {
         ArmorAttribute armorAttribute = new ArmorAttribute(1,0,0);
         Item armor = new Armor("Common Plate Chest",10,Slot.BODY, ArmorTypes.PLATE,armorAttribute);
         Hero heroWarrior = new Warrior("Mosleh"); //Warrior has to have a weapon
@@ -54,10 +53,8 @@ public class WarriorTest {
     }
 
     //test for equipment of weapon & checking the equipment hasmap if it exist
-
-
     @Test
-    public void createHeroCheckName(){
+    public void createHeroCheckName() throws HeroException {
         Hero heroWarrior = new Warrior("Mosleh"); //Warrior has to have a weapon
         assertEquals("Mosleh",heroWarrior.getName());
     }
@@ -70,14 +67,14 @@ public class WarriorTest {
     }*/
 
     @Test
-    public void createHeroCheckLevel(){
+    public void createHeroCheckLevel() throws HeroException {
 
         Hero heroWarrior = new Warrior("Mosleh"); //Warrior has to have a weapon
         assertEquals(1,heroWarrior.getLevel());
     }
 
     @Test
-    public void createHeroCheckAttributeStrength(){
+    public void createHeroCheckAttributeStrength() throws HeroException {
         //TODO: check the numbers of the hero
         Hero heroWarrior = new Warrior("Mosleh");
         assertEquals(5,heroWarrior.getHeroAttributes().getStrength());
@@ -85,7 +82,7 @@ public class WarriorTest {
     }
 
     @Test
-    public void createHeroCheckAttributeDexterity(){
+    public void createHeroCheckAttributeDexterity() throws HeroException {
         //TODO: check the numbers of the hero
         Hero heroWarrior = new Warrior("Mosleh");
         assertEquals(2,heroWarrior.getHeroAttributes().getDexterity());
@@ -93,27 +90,27 @@ public class WarriorTest {
     }
 
     @Test
-    public void createHeroCheckAttributeIntelligence(){
+    public void createHeroCheckAttributeIntelligence() throws HeroException {
         Hero heroWarrior = new Warrior("Mosleh");
         assertEquals(1,heroWarrior.getHeroAttributes().getIntelligence());
     }
 
     //TODO: create Worrior and increase level, check if the attributes are increased by correct amount
     @Test
-    public void increaseLevelCheckAttributeStrength(){
+    public void increaseLevelCheckAttributeStrength() throws HeroException {
         Hero heroWarrior = new Warrior("Mosleh");
         heroWarrior.increaseLevel(); // strength should increase by 3
         assertEquals(8,heroWarrior.getHeroAttributes().getStrength());
     }
     @Test
-    public void increaseLevelCheckAttributeDexterity(){
+    public void increaseLevelCheckAttributeDexterity() throws HeroException {
         Hero heroWarrior = new Warrior("Mosleh");
         heroWarrior.increaseLevel(); // dexterity should increase by 2
         assertEquals(4,heroWarrior.getHeroAttributes().getDexterity());
     }
 
     @Test
-    public void increaseLevelCheckAttributeIntelligence(){
+    public void increaseLevelCheckAttributeIntelligence() throws HeroException {
         Hero heroWarrior = new Warrior("Mosleh");
         heroWarrior.increaseLevel(); // intelligence should increase by 1
         assertEquals(2,heroWarrior.getHeroAttributes().getIntelligence());
@@ -121,7 +118,7 @@ public class WarriorTest {
 
     //test for calcDamage
     @Test
-    public void calcDamageCheckWithWeapon(){
+    public void calcDamageCheckWithWeapon() throws HeroException {
         //Warrrior has level 1
         //Equip Axe with damage 2
         //Strength is 5
@@ -144,10 +141,5 @@ public class WarriorTest {
 
         assertEquals(expectedDmg,heroWarrior.calcDamage());
     }
-
-
-
-
-
 
 }
