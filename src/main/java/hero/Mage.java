@@ -27,14 +27,15 @@ public class Mage extends Hero{
          * Mage increases dexterity by 1
          * Mage increases intelligence by 5
          */
+
         super.setLevel(super.getLevel()+1);
-        this.heroAttributes.setStrength(this.heroAttributes.getStrength()+1);
-        this.heroAttributes.setDexterity(this.heroAttributes.getDexterity()+1);
-        this.heroAttributes.setIntelligence(this.heroAttributes.getIntelligence()+5);
+        super.heroAttributes.setStrength(super.heroAttributes.getStrength()+1);
+        super.heroAttributes.setDexterity(super.heroAttributes.getDexterity()+1);
+        super.heroAttributes.setIntelligence(super.heroAttributes.getIntelligence()+5);
     }
 
     @Override
-    public int calcDamage() {
+    public double calcDamage() {
         /**
          * Calculate the damage for the given HERO according to the requirements
          */
@@ -49,7 +50,7 @@ public class Mage extends Hero{
 
 
 
-        float heroDmg = weaponDmg * ((float)  (1 + (intelligence  /100)));
-        return (int) heroDmg;
+        double heroDmg = weaponDmg * ((double)  (1 + (intelligence  /100)));
+        return  heroDmg;
     }
 }

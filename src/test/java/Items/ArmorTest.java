@@ -64,7 +64,6 @@ public class ArmorTest {
 
         //Assert
         assertEquals(expectedMessage, actualMessage);
-
     }
 
     //check if armor throws exception when trying to equip armor of wrong type for Mage
@@ -261,7 +260,7 @@ public class ArmorTest {
         //Act & assert of armor thorws error
         int expectedMessage = 1;
 
-        int actualMessage = heroMage.calcDamage();
+        double actualMessage = heroMage.calcDamage();
 
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -283,7 +282,7 @@ public class ArmorTest {
 
         int expectedMessage = 5;
 
-        int actualMessage = heroMage.calcDamage();
+        double actualMessage = heroMage.calcDamage();
 
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -305,7 +304,7 @@ public class ArmorTest {
 
         int expectedMessage = 3;
 
-        int actualMessage = heroMage.calcDamage();
+        double actualMessage = heroMage.calcDamage();
 
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -329,11 +328,6 @@ public class ArmorTest {
         //Assert
         assertEquals(expectedMessage, actualMessage);
     }
-
-
-
-    //
-
 
 
 

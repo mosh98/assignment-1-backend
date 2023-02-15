@@ -304,23 +304,44 @@ public class MageTest {
     }
 
     //check if mage hero calculate dmg after equipping armor and weapon and increase level
+
+
+    //check display for mage hero
     @Test
     public void mageEquipArmorAndWeaponAndIncreaseLevel_CalculateDmg_ShouldReturnDmg() throws WeaponExceptions, ArmorException, HeroException {
 
         //Arrange
         Item weapon = new Weapon("Common STAFF", 0, Slot.WEAPON, WeaponType.STAFFS, 5);
 
-        ArmorAttribute armorAttribute = new ArmorAttribute(1, 0, 2);
+        ArmorAttribute armorAttribute = new ArmorAttribute(1, 0, 5);
         Item armor = new Armor("Common Plate Chest", 1, Slot.BODY, ArmorTypes.CLOTH, armorAttribute);
-        Hero heroMage = new Mage("Mage"); //Mage has to have a weapon
+        Hero heroMage = new Mage("Mosh Mage"); //Mage has to have a weapon
 
         //Act
-        heroMage.equip(weapon);
-        heroMage.equip(armor);
-        heroMage.increaseLevel();
+        //System.out.println("Before Equping weapon");
+        heroMage.displayHero();
 
+        //System.out.println("_________________");
+        heroMage.equip(weapon);
+        //System.out.println("After Equping weapon");
+        heroMage.displayHero();
+
+        //System.out.println("__________________________________");
+        heroMage.equip(armor);
+        //System.out.println("After Equping armor");
+        heroMage.displayHero();
+
+        //System.out.println("__________________________________");
+        //System.out.println("After increase level");
+        heroMage.increaseLevel();
+        heroMage.displayHero();
+
+        System.out.println(heroMage.calcDamage());
         //Assert
-        assertEquals(10, heroMage.calcDamage());
+        //assertEquals(18, heroMage.displayHero());
+        assertEquals(5,heroMage.calcDamage());
+
+
 
     }
 

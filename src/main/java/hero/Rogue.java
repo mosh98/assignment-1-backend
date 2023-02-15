@@ -26,7 +26,7 @@ public class Rogue extends Hero{
     }
 
     @Override
-    public int calcDamage() {
+    public double calcDamage() {
         int weaponDmg = 1;
         //check if weapon is equipped
         if(super.getEquipment().get(Slot.WEAPON) != null){
@@ -35,8 +35,8 @@ public class Rogue extends Hero{
             weaponDmg = ((Weapon) super.getEquipment().get(Slot.WEAPON)).getWeaponDamage();
         }
 
-        float heroDmg = weaponDmg * ((float)  (1 + (this.heroAttributes.getDexterity()  /100)));
-        return (int) heroDmg;
+        double heroDmg = weaponDmg * ((double)  (1 + (this.heroAttributes.getDexterity()  /100)));
+        return  heroDmg;
     }
 
 
