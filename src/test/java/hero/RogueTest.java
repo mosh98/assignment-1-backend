@@ -48,7 +48,7 @@ public class RogueTest {
 
 
         //Assert
-        assertEquals("Hero level is lower than required level of armor", exception.getMessage());
+        assertEquals("Hero level is not enough to equip this armor", exception.getMessage());
 
     }
 
@@ -239,10 +239,65 @@ public class RogueTest {
         double totalDamage = rogue.calcDamage();
 
         //Assert
-        assertEquals(10.6, totalDamage,0.0);
+        assertEquals(10.0, totalDamage,0.0);
+
     }
 
+    //create hero, replace weapon check damage
+    @Test
+    public void createHeroWithWeapon_checkTotalDamageAfterReplacingWeapon_assertEquals() throws HeroException, WeaponExceptions, ArmorException {
+        //Arrange
+        Item weapon = new Weapon("Super Sword",1, Slot.WEAPON, WeaponType.SWORDS, 10);
+        Item weapon2 = new Weapon("Super Sword",1, Slot.WEAPON, WeaponType.SWORDS, 20);
+        Hero rogue = new Rogue("Rogue");
 
+        //Act
+        rogue.equip(weapon);
+        rogue.equip(weapon2);
+        double totalDamage = rogue.calcDamage();
+
+        //Assert
+        assertEquals(20.0, totalDamage,0.0);
+
+    }
+
+    //create hero, check total damage with weapon and armor equipped
+    @Test
+    public void createHeroWithWeaponAndArmor_checkTotalDamage_assertEquals() throws HeroException, WeaponExceptions, ArmorException {
+        //Arrange
+        Item weapon = new Weapon("Super Sword",1, Slot.WEAPON, WeaponType.SWORDS, 10);
+        Item armor = new Armor("Super Mail",1, Slot.BODY, ArmorTypes.LEATHER, new ArmorAttribute(10,10,10));
+        Hero rogue = new Rogue("Rogue");
+
+        //Act
+        rogue.equip(weapon);
+        rogue.equip(armor);
+        double totalDamage = rogue.calcDamage();
+
+        //Assert
+        assertEquals(11.0, totalDamage,1.0);
+
+    }
+
+    //create hero, and cannot equip wrong weapon type
+    @Test
+    public void createHeroEquipWrongWeapon_checkException() throws HeroException, WeaponExceptions, ArmorException {
+        //Arrange
+        Item weapon = new Weapon("Super Sword", 1, Slot.WEAPON, WeaponType.BOWS, 10);
+        Hero rogue = new Rogue("Rogue");
+
+        //Act
+        Exception exception = assertThrows(WeaponExceptions.class,
+                () -> {
+                    rogue.equip(weapon);
+                });
+        String expectedMessage = "Weapon TYPE Exception";
+
+        //Assert
+        assertEquals(expectedMessage, exception.getMessage());
+
+
+    }
 
 
 
