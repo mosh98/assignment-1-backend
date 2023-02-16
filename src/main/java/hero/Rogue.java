@@ -36,6 +36,7 @@ public class Rogue extends Hero{
         }
 
         double heroDmg = weaponDmg * ((double)  (1 + (this.heroAttributes.getDexterity()  /100)));
+
         return  heroDmg;
     }
 

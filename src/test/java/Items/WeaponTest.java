@@ -12,6 +12,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 public class WeaponTest {
+    /**
+     * This Test class only has tests for the Weapon class
+     * 1. Test are created for the constructor and parameter checking
+     * for example, if weapon has correct slot, weapon type and damage etc.
+     * Tried to keep this seperate from the Hero class tests
+     */
 
     @Test
     public void equipWeapon_tryEquping_assertEqualsWeaponObject() throws HeroException {
@@ -73,12 +79,10 @@ public class WeaponTest {
 
         //Assert
         assertEquals(requiredLevel, weapon.getRequiredLevel());
-
     }
+
     /**
      * When created, check correct slot
-     * @throws WeaponExceptions
-     *
      */
     @Test
     public void createWeapon_checkSlot_assertSlot() {
@@ -96,7 +100,6 @@ public class WeaponTest {
 
     /**
      * When created, check correct weapon damage
-     *
      */
     @Test
     public void createWeapon_checkWeaponDamage_assertWeaponDamage() throws WeaponExceptions {

@@ -99,19 +99,36 @@ public abstract class Hero {
 
             //controll if the weapon is valid
             if(weaponOrArmor.getRequiredLevel() <= this.level) {
+
+                for (int i = 0; i < validWeaponTypes.length; i++) {
+                    WeaponType validWeaponType = validWeaponTypes[i];
+                    if (validWeaponType == ((Weapon) weaponOrArmor).getWeaponType()) {
+                        if(weaponOrArmor.getSlot() == Slot.WEAPON) {
+                            equipment.put(Slot.WEAPON, weaponOrArmor);
+                        }
+                        break;
+                    } if( i == validWeaponTypes.length - 1) {
+                        //throw
+                        throw new WeaponExceptions("Weapon TYPE Exception");
+                    }
+
+                }
+
                 //controll if the weapon is valid
-                for (WeaponType validWeaponType : validWeaponTypes) {
+                /*for (WeaponType validWeaponType : validWeaponTypes) {
                     //this if statement check if slot is weapon and if the weapon type is valid for the hero
                     if (validWeaponType == ((Weapon) weaponOrArmor).getWeaponType()) {
                         if(weaponOrArmor.getSlot() == Slot.WEAPON) {
                             equipment.put(Slot.WEAPON, weaponOrArmor);
                         }
                         break;
-                    }else {
+                    }
+                    else {
                         //throw
                         throw new WeaponExceptions("Weapon TYPE Exception");
                     }
-                }
+                }*/
+
             }else {
                 throw new WeaponExceptions("Hero level is lower than required level of weapon");
             }

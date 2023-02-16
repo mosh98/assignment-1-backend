@@ -1,5 +1,7 @@
 package Items.Armor;
 
+import java.util.Objects;
+
 public class ArmorAttribute {
     private int strength;
     private int dexterity;
@@ -15,23 +17,27 @@ public class ArmorAttribute {
         return strength;
     }
 
-    public void setStrength(int strength) {
-        this.strength = strength;
-    }
+
 
     public int getDexterity() {
         return dexterity;
     }
 
-    public void setDexterity(int dexterity) {
-        this.dexterity = dexterity;
-    }
 
     public int getIntelligence() {
         return intelligence;
     }
 
-    public void setIntelligence(int intelligence) {
-        this.intelligence = intelligence;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ArmorAttribute that = (ArmorAttribute) o;
+        return strength == that.strength && dexterity == that.dexterity && intelligence == that.intelligence;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(strength, dexterity, intelligence);
     }
 }

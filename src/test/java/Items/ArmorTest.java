@@ -19,6 +19,7 @@ public class ArmorTest {
     /**
      * Equip Armor!
      * Checking different configuration of armor and if the hero throws anything
+     * Tested inconjuction with the Hero classes
      *
      */
 

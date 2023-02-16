@@ -25,6 +25,7 @@ public class Armor extends Item {
         return armorTypes;
     }
 
+
     public ArmorAttribute getArmorAttribute() {
         return armorAttribute;
     }
