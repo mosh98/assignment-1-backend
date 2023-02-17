@@ -203,30 +203,20 @@ public abstract class Hero {
         return heroAttributes;
     }
 
-    public int calcTotalAttributes(){
+    public HeroAttributes calcTotalAttributes() {
+
         /**
-         * @return int
-         * Calculate the total attributes of the hero
-         * including the attributes of the equipped armor
+         * @return HeroAttributes
+         *  each attribute in Hero attributes already has cumulative armor and hero attributes.
+         *
          */
 
-        int sumOfCurrentHeroAttributes = this.getHeroAttributes().getStrength()+ this.getHeroAttributes().getDexterity()+ this.getHeroAttributes().getIntelligence();
-        int sumOfCurrentAromorAttributes = 0;
-
-        //iterate through the equipment hashmap
-
-        for (Item item : equipment.values()) {
-            if(item != null && item.getSlot() != Slot.WEAPON) { //re-configure the if statement
-                sumOfCurrentAromorAttributes += ((Armor) item).getArmorAttribute().getStrength() + ((Armor) item).getArmorAttribute().getDexterity() + ((Armor) item).getArmorAttribute().getIntelligence();
-            }
-        }
-
-        return sumOfCurrentHeroAttributes + sumOfCurrentAromorAttributes;
+        return this.getHeroAttributes();
     }
 
     public abstract double calcDamage();
 
-    //TODO: Show Hero with correct subclass name
+    //TODO: return stringbuilder
     public void displayHero() {
         /**
          * @return StringBuilder

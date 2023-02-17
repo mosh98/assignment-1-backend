@@ -1,5 +1,6 @@
 package hero;
 
+import HeroAttributes.HeroAttributes;
 import HeroExceptions.ArmorException;
 import HeroExceptions.HeroException;
 import HeroExceptions.WeaponExceptions;
@@ -71,6 +72,7 @@ public class WarriorTest {
 
     /** create Warrior with empty name,
      * @result should throw exception */
+
     //Create Warrior with empty name, should throw error
     @Test
     public void createHeroWithEmptyName_throwError() throws HeroException {
@@ -165,9 +167,38 @@ public class WarriorTest {
         }
 
 //        System.out.println(heroWarrior.calcDamage());
-        int expectedDmg = 2*(1+(5/100));
+        double expectedDmg = 2*(1+(5/100));
 
-        assertEquals(expectedDmg,heroWarrior.calcDamage());
+        assertEquals(expectedDmg,heroWarrior.calcDamage(),0.0);
     }
+
+    //create hero, check total attribute, after equipping 2 armor body and legs and increasing level, check total attribute
+    @Test
+    public void equipArmor_CheckTotalAttribute_assertEquals() throws HeroException, ArmorException, WeaponExceptions {
+        //Arrange
+        Hero heroWarrior = new Warrior("Mosleh");
+        ArmorAttribute armorAttribute = new ArmorAttribute(1,0,0);
+        Item armor = new Armor("Common Plate Chest",1,Slot.BODY, ArmorTypes.PLATE,armorAttribute);
+        Item armor2 = new Armor("Common Plate Legs",1,Slot.LEGS, ArmorTypes.PLATE,armorAttribute);
+
+        /**
+         * st: 5 + 10 + 10 + 3 = 28
+         * dx: 2 + 10 + 10 + 2 = 24
+         * in: 1 + 10 + 10 + 1 = 22
+         */
+
+        //ACT
+        heroWarrior.equip(armor);
+        heroWarrior.equip(armor2);
+        heroWarrior.increaseLevel();
+
+
+        HeroAttributes expectedHeroAttributes = new HeroAttributes(28,24,22);
+
+
+        //Assert
+        assertEquals(expectedHeroAttributes, heroWarrior.calcTotalAttributes()) ;
+    }
+
 
 }

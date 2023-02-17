@@ -1,11 +1,11 @@
 package HeroAttributes;
 
+import java.util.Objects;
+
 public class HeroAttributes {
     int strength;
     int dexterity;
     int intelligence;
-
-    int armourAttribute;
 
     public HeroAttributes() {
 
@@ -46,4 +46,25 @@ public class HeroAttributes {
         return intelligence;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HeroAttributes that = (HeroAttributes) o;
+        return strength == that.strength && dexterity == that.dexterity && intelligence == that.intelligence;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(strength, dexterity, intelligence);
+    }
+
+    @Override
+    public String toString() {
+        return "HeroAttributes{" +
+                "strength=" + strength +
+                ", dexterity=" + dexterity +
+                ", intelligence=" + intelligence +
+                '}';
+    }
 }

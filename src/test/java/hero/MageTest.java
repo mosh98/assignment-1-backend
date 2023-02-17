@@ -1,5 +1,6 @@
 package hero;
 
+import HeroAttributes.HeroAttributes;
 import HeroExceptions.ArmorException;
 import HeroExceptions.HeroException;
 import HeroExceptions.WeaponExceptions;
@@ -278,7 +279,7 @@ public class MageTest {
         heroMage.equip(weapon);
 
         //Assert
-        assertEquals(5,heroMage.calcDamage());
+        assertEquals(5.0,heroMage.calcDamage(),0.0);
 
     }
 
@@ -299,7 +300,7 @@ public class MageTest {
         heroMage.equip(armor);
 
         //Assert
-        assertEquals(5,heroMage.calcDamage());
+        assertEquals(5.0,heroMage.calcDamage(),0.0);
 
     }
 
@@ -318,31 +319,44 @@ public class MageTest {
         Hero heroMage = new Mage("Mosh Mage"); //Mage has to have a weapon
 
         //Act
-        //System.out.println("Before Equping weapon");
-        heroMage.displayHero();
 
-        //System.out.println("_________________");
         heroMage.equip(weapon);
-        //System.out.println("After Equping weapon");
-        heroMage.displayHero();
 
-        //System.out.println("__________________________________");
         heroMage.equip(armor);
-        //System.out.println("After Equping armor");
-        heroMage.displayHero();
 
-        //System.out.println("__________________________________");
-        //System.out.println("After increase level");
         heroMage.increaseLevel();
-        heroMage.displayHero();
 
-        System.out.println(heroMage.calcDamage());
         //Assert
         //assertEquals(18, heroMage.displayHero());
-        assertEquals(5,heroMage.calcDamage());
+        assertEquals(5.0,heroMage.calcDamage(),0.0);
 
 
 
+
+    }
+    //create hero, check total attribute after equipping 2 armor and increasing level
+    @Test
+    public void createHeroEquip2Armor_checkTotalAttributeAfterLevelUp_assertEquals() throws HeroException, WeaponExceptions, ArmorException {
+        //Arrange
+        Item armorBody = new Armor("Super Leather",1, Slot.BODY, ArmorTypes.CLOTH, new ArmorAttribute(10,10,10));
+        Item armorLegs = new Armor("Super leather",1, Slot.LEGS, ArmorTypes.CLOTH, new ArmorAttribute(10,10,10));
+        Hero mage = new Mage("Mage");
+
+        // st: 1+10+10+1 = 22
+        // dt: 1+10+10+1 = 22
+        // SI: 8+10+10+5 = 33
+
+        //Act
+        mage.equip(armorBody);
+        mage.equip(armorLegs);
+
+        mage.increaseLevel();
+
+        HeroAttributes expectedHeroAttributes = new HeroAttributes(22,22,33);
+
+
+        //Assert
+        assertEquals(expectedHeroAttributes, mage.calcTotalAttributes());
     }
 
 

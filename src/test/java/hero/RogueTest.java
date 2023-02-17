@@ -1,5 +1,6 @@
 package hero;
 
+import HeroAttributes.HeroAttributes;
 import HeroExceptions.ArmorException;
 import HeroExceptions.HeroException;
 import HeroExceptions.WeaponExceptions;
@@ -295,10 +296,32 @@ public class RogueTest {
 
         //Assert
         assertEquals(expectedMessage, exception.getMessage());
-
-
     }
 
+    //create hero, check attribute after equiping 2 armor on body and legs and increasing level
+    @Test
+    public void createHeroEquip2Armor_checkTotalAttributeAfterLevelUp_assertEquals() throws HeroException, WeaponExceptions, ArmorException {
+        //Arrange
+        Item armorBody = new Armor("Super Leather",1, Slot.BODY, ArmorTypes.LEATHER, new ArmorAttribute(10,10,10));
+        Item armorLegs = new Armor("Super leather",1, Slot.LEGS, ArmorTypes.LEATHER, new ArmorAttribute(10,10,10));
+        Hero rogue = new Rogue("Rogue");
 
+        // st: 2+10+10+1
+        // dt: 6+10+10+4
+        // SI: 1+10+10+1
+
+        //Act
+        rogue.equip(armorBody);
+        rogue.equip(armorLegs);
+
+        rogue.increaseLevel();
+
+        HeroAttributes expectedHeroAttributes = new HeroAttributes(23,30,22);
+
+        //System.out.println(rogue.calcTotalAttributes());
+
+        //Assert
+        assertEquals(expectedHeroAttributes, rogue.calcTotalAttributes());
+    }
 
 }

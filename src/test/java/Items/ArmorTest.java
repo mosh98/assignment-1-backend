@@ -259,12 +259,12 @@ public class ArmorTest {
         Hero heroMage = new Mage("Mage"); //Mage has to have a weapon
 
         //Act & assert of armor thorws error
-        int expectedMessage = 1;
+        double expectedMessage = 1.0;
 
         double actualMessage = heroMage.calcDamage();
 
         //Assert
-        assertEquals(expectedMessage, actualMessage);
+        assertEquals(expectedMessage, actualMessage,0.0);
     }
 
     //check Mage hero damage with weapon after replacing weapon
@@ -281,12 +281,12 @@ public class ArmorTest {
         Item weapon2 = new Weapon("Deluxe Sword",0,Slot.WEAPON, WeaponType.STAFFS,5);
         heroMage.equip(weapon2);
 
-        int expectedMessage = 5;
+        double expectedMessage = 5.0;
 
         double actualMessage = heroMage.calcDamage();
 
         //Assert
-        assertEquals(expectedMessage, actualMessage);
+        assertEquals(expectedMessage, actualMessage,0.0);
     }
 
     //check Mage hero damage with weapon after replacing armor
@@ -303,12 +303,12 @@ public class ArmorTest {
         Item armor = new Armor("Common Plate Chest",0,Slot.BODY, ArmorTypes.CLOTH,new ArmorAttribute(1,0,0));
         heroMage.equip(armor);
 
-        int expectedMessage = 3;
+        double expectedMessage = 3.0;
 
         double actualMessage = heroMage.calcDamage();
 
         //Assert
-        assertEquals(expectedMessage, actualMessage);
+        assertEquals(expectedMessage, actualMessage,0.0);
     }
 
     //check Mage hero cannot equip wrong weapon
