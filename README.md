@@ -27,3 +27,5 @@ The rest is in the Items directory.
 2. Weapon.java
 
 
+## Class Heirarchy
+![Alt text](public/java.png?raw=true "Class Heirarchy")
