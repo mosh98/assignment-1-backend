@@ -18,10 +18,10 @@ public abstract class Hero {
     //fields GENREAL:
     //Name
     private String name;
+
+
     //Level
     private int level;
-
-
 
     //ValidWeaponTypes
     private WeaponType[] validWeaponTypes;
