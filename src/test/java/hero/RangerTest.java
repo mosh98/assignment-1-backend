@@ -164,6 +164,29 @@ public class RangerTest {
         assertEquals(10.0, heroRanger.calcDamage(),0.0);
     }
 
+    //create hero, check display
+    @Test
+    public void createHero_CheckDisplay() throws HeroException {
+
+        //Arrange
+        Hero heroRanger = new Ranger("Mosleh");
+
+        //Act
+        StringBuilder display = heroRanger.displayHero();
+
+        //System.out.println(display.toString());
+        String expected = "Name: Mosleh\n" +
+                "Class: Ranger\n" +
+                "Level: 1\n" +
+                "Total Strength: 1\n" +
+                "Total Dexterity: 7\n" +
+                "Total Intelligence: 1\n" +
+                "Total Attributes: 9\n" ;
+
+        //Assert
+        assertEquals(expected, display.toString());
+    }
+
 
 
 

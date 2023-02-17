@@ -359,5 +359,28 @@ public class MageTest {
         assertEquals(expectedHeroAttributes, mage.calcTotalAttributes());
     }
 
+    //create hero, check display
+    @Test
+    public void createHero_CheckDisplay() throws HeroException {
+
+        //Arrange
+        Hero heroMage = new Mage("Mosleh");
+
+        //Act
+        StringBuilder display = heroMage.displayHero();
+
+        //System.out.println(display.toString());
+        String expected = "Name: Mosleh\n" +
+                "Class: Mage\n" +
+                "Level: 1\n" +
+                "Total Strength: 1\n" +
+                "Total Dexterity: 1\n" +
+                "Total Intelligence: 8\n" +
+                "Total Attributes: 10\n" ;
+
+        //Assert
+        assertEquals(expected, display.toString());
+    }
+
 
 }

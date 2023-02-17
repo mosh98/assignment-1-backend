@@ -324,4 +324,28 @@ public class RogueTest {
         assertEquals(expectedHeroAttributes, rogue.calcTotalAttributes());
     }
 
+    //create hero, check display
+    @Test
+    public void createHero_CheckDisplay() throws HeroException {
+
+        //Arrange
+        Hero heroRogue = new Rogue("Mosleh");
+
+        //Act
+        StringBuilder display = heroRogue.displayHero();
+
+        //System.out.println(display.toString());
+        String expected = "Name: Mosleh\n" +
+                "Class: Rogue\n" +
+                "Level: 1\n" +
+                "Total Strength: 2\n" +
+                "Total Dexterity: 6\n" +
+                "Total Intelligence: 1\n" +
+                "Total Attributes: 9\n" ;
+
+        //Assert
+        assertEquals(expected, display.toString());
+    }
+
+
 }

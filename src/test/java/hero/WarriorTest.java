@@ -200,5 +200,28 @@ public class WarriorTest {
         assertEquals(expectedHeroAttributes, heroWarrior.calcTotalAttributes()) ;
     }
 
+    //create hero, check display
+    @Test
+    public void createHero_CheckDisplay() throws HeroException {
+
+        //Arrange
+        Hero heroWarrior = new Warrior("Mosleh");
+
+        //Act
+        StringBuilder display = heroWarrior.displayHero();
+
+        //System.out.println(display.toString());
+        String expected = "Name: Mosleh\n" +
+                "Class: Warrior\n" +
+                "Level: 1\n" +
+                "Total Strength: 5\n" +
+                "Total Dexterity: 2\n" +
+                "Total Intelligence: 1\n" +
+                "Total Attributes: 8\n" ;
+
+        //Assert
+        assertEquals(expected, display.toString());
+    }
+
 
 }

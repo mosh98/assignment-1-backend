@@ -229,7 +229,7 @@ public abstract class Hero {
         hero.append("Total Strength: ").append(this.getHeroAttributes().getStrength()).append("\n");
         hero.append("Total Dexterity: ").append(this.getHeroAttributes().getDexterity()).append("\n");
         hero.append("Total Intelligence: ").append(this.getHeroAttributes().getIntelligence()).append("\n");
-        hero.append("Total Attributes: ").append(this.calcTotalAttributes()).append("\n");
+        hero.append("Total Attributes: ").append((this.calcTotalAttributes().getStrength()+this.calcTotalAttributes().getDexterity()+this.calcTotalAttributes().getIntelligence()) ).append("\n");
         System.out.println(hero);
 
         return hero;
