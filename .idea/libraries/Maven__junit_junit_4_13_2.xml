@@ -10,4 +10,5 @@
       <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.13.2/junit-4.13.2-sources.jar!/" />
     </SOURCES>
   </library>
+
 </component>
