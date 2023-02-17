@@ -217,7 +217,7 @@ public abstract class Hero {
     public abstract double calcDamage();
 
     //TODO: return stringbuilder
-    public void displayHero() {
+    public StringBuilder displayHero() {
         /**
          * @return StringBuilder
          * Displaying the hero with all the attributes
@@ -232,6 +232,7 @@ public abstract class Hero {
         hero.append("Total Attributes: ").append(this.calcTotalAttributes()).append("\n");
         System.out.println(hero);
 
+        return hero;
     }
 
 

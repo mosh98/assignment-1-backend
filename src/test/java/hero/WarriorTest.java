@@ -177,7 +177,7 @@ public class WarriorTest {
     public void equipArmor_CheckTotalAttribute_assertEquals() throws HeroException, ArmorException, WeaponExceptions {
         //Arrange
         Hero heroWarrior = new Warrior("Mosleh");
-        ArmorAttribute armorAttribute = new ArmorAttribute(1,0,0);
+        ArmorAttribute armorAttribute = new ArmorAttribute(10,10,10);
         Item armor = new Armor("Common Plate Chest",1,Slot.BODY, ArmorTypes.PLATE,armorAttribute);
         Item armor2 = new Armor("Common Plate Legs",1,Slot.LEGS, ArmorTypes.PLATE,armorAttribute);
 
