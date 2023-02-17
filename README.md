@@ -28,4 +28,6 @@ The rest is in the Items directory.
 
 
 ## Class Heirarchy
-![Alt text](public/java.png?raw=true "Class Heirarchy")
+
+
+![Alt text](/java.png?raw=true "Title")
